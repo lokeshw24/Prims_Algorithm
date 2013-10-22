@@ -44,15 +44,16 @@ class Graph :
 			if( nodes.name==root ) :
 				nodes.key=0
 			else :
-				nodes.key=9999999
+				nodes.key=9999999 #represents infinity
 			min_priority_queue[nodes.name]=nodes.key
 
 		while min_priority_queue :
-			#get the node-name from the queue that has the minimum key-value
+			#get the node-name from the queue that has the minimum key-value and then pop it from the queue
 			node_with_min_key=min(min_priority_queue, key=min_priority_queue.get)
 			del min_priority_queue[node_with_min_key]
 			print node_with_min_key
 
+			#now we update the key values of all the neighbours of the node that is popped out from the queue
 			target_neighbours=self.get_neighbours(node_with_min_key)
 
 			#delete nodes already visited
@@ -89,7 +90,8 @@ def main():
 	my_graph = Graph()
 	init_graph(my_graph)
 	my_graph.print_nodes()
-
+	
+	#node 'c' is the source to start with the Prim's Algo.
 	my_graph.prim_algo('c')
 
 main()
